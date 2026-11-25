@@ -1,0 +1,20 @@
+biopython==1.85
+esm==3.2.1
+h5py==3.14.0
+matplotlib==3.10.3
+numpy==2.2.4
+pandas==2.3.0
+protlearn==0.0.3
+pyfaidx==0.9.0.3
+PyYAML==6.0.2
+scikit-learn==1.7.0
+sentencepiece==0.2.1
+torch==2.7.1
+tqdm==4.67.1
+transformers==4.48.1
+# Additional imports used by the selected research modules
+seaborn
+torchmetrics
+# Experiment tracking / tuning in the original research workflow
+optuna
+wandb

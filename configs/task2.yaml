@@ -1,0 +1,25 @@
+model:
+  model_type: Task2Model
+  dims:
+  - 128
+  - 256
+  - 7
+  dropouts:
+  - 0.11764897516223502
+  activation:
+    name: LeakyReLU
+    negative_slope: 0.01
+  normalize: false
+  dtype: torch.float32
+training:
+  optimizer:
+    name: AdamW
+    lr: 0.001
+    weight_decay: 0.03424566834898443
+  loss_fn: CrossEntropyLoss
+  epochs: 200
+  patience: 12
+dataset:
+  name: embeddings_uniprot_exp_enzymes_c30_flens2-98_usamp2000_exp_train85_dim128
+  size: 6672
+  feature_dim: (128,)

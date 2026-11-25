@@ -1,0 +1,1 @@
+"""Academic enzyme classification portfolio."""

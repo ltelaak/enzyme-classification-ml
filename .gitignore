@@ -221,3 +221,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Research artifacts and local configuration
+**/data/
+**/temp/
+**/wandb/
+**/.ipynb_checkpoints/
+*.h5
+*.hdf5
+*.pth
+*.pt
+*.pkl
+*.joblib
+*.sqlite3
+*.log
+.env
+.env.*
