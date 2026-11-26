@@ -1,0 +1,7 @@
+param_min_samples_split	param_min_samples_leaf	param_max_features	param_max_depth	mean_fit_time	params	mean_test_accuracy	std_test_accuracy	mean_test_mcc	std_test_mcc	rank_test_mcc	rank_test_accuracy	final_test_acc	final_test_mcc
+5	1	sqrt		108.90698471069337	{'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None}	0.9430776892430279	0.0015174949188438763	0.8862812640462593	0.0030483088809377668	1.0	1.0	0.9465139442231075	0.8930013340185965
+5	1	log2	10	15.519909954071045	{'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2', 'max_depth': 10}	0.915961155378486	0.0018815871999315215	0.8321262821802957	0.0038530202144505415	6.0	6.0		
+5	1	log2	30	25.274178123474123	{'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'log2', 'max_depth': 30}	0.9392430278884462	0.00201985057676031	0.878608595085382	0.004018637294931658	4.0	4.0		
+5	4	sqrt	30	76.78558235168457	{'min_samples_split': 5, 'min_samples_leaf': 4, 'max_features': 'sqrt', 'max_depth': 30}	0.9391434262948207	0.0024364247773700416	0.8784012065672926	0.00485239762362395	5.0	5.0		
+2	1	log2		26.282741022109985	{'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'log2', 'max_depth': None}	0.9408366533864541	0.0022622392238513677	0.8818308352049439	0.004511878465608867	2.0	2.0		
+5	2	log2		24.72816390991211	{'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': None}	0.9392679282868526	0.003026602198493027	0.8786840472103489	0.0060115510022408685	3.0	3.0		

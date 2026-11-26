@@ -1,0 +1,11 @@
+param_min_samples_split	param_min_samples_leaf	param_max_features	param_max_depth	mean_fit_time	params	mean_test_accuracy	std_test_accuracy	mean_test_mcc	std_test_mcc	rank_test_mcc	rank_test_accuracy	final_test_acc	final_test_mcc
+2	1	sqrt		14.860037422180175	{'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None}	0.8310756972111554	0.002932966759308093	0.6622050420788715	0.005844154628170649	1.0	1.0	0.8388446215139442	0.677706143627264
+5	2	log2	20	11.255132961273194	{'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': 20}	0.825796812749004	0.0024830579407007663	0.6516934416359157	0.004964686149038661	6.0	6.0		
+5	2	log2		11.946646785736084	{'min_samples_split': 5, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': None}	0.8280876494023903	0.003133297384412545	0.6562229569025456	0.006264266222562842	5.0	5.0		
+2	2	sqrt		14.278084707260131	{'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': None}	0.8282868525896415	0.003661628773835017	0.6565925481963012	0.007329117716765863	4.0	4.0		
+2	4	sqrt		13.643201732635498	{'min_samples_split': 2, 'min_samples_leaf': 4, 'max_features': 'sqrt', 'max_depth': None}	0.8256474103585656	0.004431011728561772	0.6513022861406785	0.008861861501659154	7.0	7.0		
+2	2	log2		11.983119535446168	{'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': None}	0.8288097609561753	0.0042622616455736135	0.657624205701101	0.008524109075097193	3.0	3.0		
+2	1	sqrt	10	9.45567946434021	{'min_samples_split': 2, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': 10}	0.7933017928286852	0.0027041878526371135	0.5879538637269206	0.0051934368725704205	8.0	8.0		
+2	2	sqrt	10	9.465889310836792	{'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'sqrt', 'max_depth': 10}	0.7931772908366534	0.002906421605859525	0.5878004074675751	0.0055070318561933704	9.0	9.0		
+5	1	sqrt		14.804114866256715	{'min_samples_split': 5, 'min_samples_leaf': 1, 'max_features': 'sqrt', 'max_depth': None}	0.8305527888446216	0.0027537183866432505	0.6611335475352333	0.005509801541732862	2.0	2.0		
+2	2	log2	10	7.937631034851075	{'min_samples_split': 2, 'min_samples_leaf': 2, 'max_features': 'log2', 'max_depth': 10}	0.7893426294820717	0.004254253289690269	0.580240637543356	0.008314782938327587	10.0	10.0		

@@ -1,0 +1,20 @@
+feature,classifier,best_cv_mcc,recorded_final_test_mcc,source_file
+AAC,Logistic Regression,0.39790596319029076,0.3922216056251856,aac/aac_logr.tsv
+AAC,Random Forest,0.6567836369092059,0.6629500546871059,aac/aac_rf.tsv
+AAC,Linear SVC,0.40041472360595487,0.3943451209034012,aac/aac_svm.tsv
+AAindex,Logistic Regression,0.39839575756356804,0.3919030251548582,aaindex/aaindex_logr.tsv
+AAindex,Random Forest,0.668745209005038,0.6730680663700805,aaindex/aaindex_rf.tsv
+AAindex,Linear SVC,0.39839575756356804,0.3916946127093268,aaindex/aaindex_svm.tsv
+AAindex + n-grams,Logistic Regression,0.5254063494964708,0.5312516710142461,hybrid_aaindex_ngrams/hybrid_aaindex_ngrams_logr.tsv
+AAindex + n-grams,Random Forest,0.6806373914247063,0.6785171836370091,hybrid_aaindex_ngrams/hybrid_aaindex_ngrams_rf.tsv
+AAindex + n-grams,Linear SVC,0.52462015782502,0.5319989334989117,hybrid_aaindex_ngrams/hybrid_aaindex_ngrams_svm.tsv
+AAindex + PseAAC,Logistic Regression,0.5453216426887539,0.5458039147272165,hybrid_aaindex_pseaac/hybrid_aaindex_pseaac_logr.tsv
+AAindex + PseAAC,Random Forest,0.6805933016062282,0.6892475751741521,hybrid_aaindex_pseaac/hybrid_aaindex_pseaac_rf.tsv
+AAindex + PseAAC,Linear SVC,0.546386652253273,0.5427193620330852,hybrid_aaindex_pseaac/hybrid_aaindex_pseaac_svm.tsv
+One-hot,Logistic Regression,0.4348124635934683,0.4397013277259777,one_hot_encoding/one_hot_encoding_logr.tsv
+One-hot,Random Forest,0.38751208916891877,0.4218305882104421,one_hot_encoding/one_hot_encoding_rf.tsv
+One-hot,Linear SVC,0.37815078633870713,0.41393172520611127,one_hot_encoding/one_hot_encoding_svm.tsv
+ProtT5,Random Forest,0.8862812640462593,0.8930013340185965,prott5/prott5_rf.tsv
+PseAAC,Logistic Regression,0.47929161959609107,0.4734316462325108,pseaac/pseaac_logr.tsv
+PseAAC,Random Forest,0.6622050420788715,0.677706143627264,pseaac/pseaac_rf.tsv
+PseAAC,Linear SVC,0.4875974911370607,0.48103711885282896,pseaac/pseaac_svm.tsv

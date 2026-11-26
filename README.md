@@ -36,6 +36,10 @@ flowchart TD
 
 The historical preprocessing and feature-comparison notebooks are retained under the respective task directories. See [data preparation and feature engineering](docs/data_preparation.md) for the documented final datasets and [original clustering-threshold results](results/data_analysis/task1_clustering/) for exploratory comparisons. Notebook outputs were cleared and local paths made relative; the notebooks are archival and have not been rerun. Original datasets and embeddings are not distributed.
 
+## Baseline and feature comparisons
+
+The original [feature/classifier search exports](results/feature_comparison/gridsearch_model_comparison/) and [later baseline comparison figures](results/baselines/) document the exploratory path to the compact neural classifiers. Their experimental conditions are not assumed identical; the older ProtT5 RF grid-search export records a higher MCC than the final FNN, and its exact original split is unverified.
+
 ## Results
 
 These are results from the original collaborative project, not from a new run of the portfolio code.
@@ -56,7 +60,7 @@ task_2/src/       Multiclass classifier and research utilities
 task_3/src/       Portable hierarchical model adapter
 configs/         Selected original model configurations
 task_1/notebooks/ Historical preprocessing and feature/classifier comparisons
-task_2/notebooks/ Historical preprocessing
+task_2/notebooks/ Historical preprocessing and Random Forest baseline
 results/         Selected original experimental and test results
 docs/            Research methodology and archival notes
 scripts/         Synthetic model-interface smoke test
