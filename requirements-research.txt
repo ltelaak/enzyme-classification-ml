@@ -6,6 +6,7 @@ numpy==2.2.4
 pandas==2.3.0
 protlearn==0.0.3
 pyfaidx==0.9.0.3
+pymmseqs==1.0.5
 PyYAML==6.0.2
 scikit-learn==1.7.0
 sentencepiece==0.2.1
