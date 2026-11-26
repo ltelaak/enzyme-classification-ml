@@ -1,0 +1,7 @@
+model,metric,value,source
+DeepEC,weighted_f1,0.35,Fig. 11
+Task2Model,weighted_f1,0.72,Fig. 11
+BLASTp,weighted_f1,0.83,Fig. 11
+ECPred,weighted_f1,0.87,Fig. 11
+CLEAN,weighted_f1,0.95,Fig. 11
+Task2Model,macro_f1,0.72,Section 4.3

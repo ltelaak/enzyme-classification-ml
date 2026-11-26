@@ -56,7 +56,8 @@ These are results from the original collaborative project, not from a new run of
 |---|---|---|---:|
 | Binary enzyme detection | Internal test set (5,901 proteins) | MCC | **0.82** |
 | EC main class prediction | Internal test set (1,178 enzymes) | Macro-F1 | **0.74** |
-| EC main class prediction | Independent Price-149 benchmark | Weighted F1 | **0.72** |
+| Hierarchical non-enzyme / EC 1–7 prediction | [Internal combined test](results/task3/) | Macro-F1 | **0.6953** |
+| EC main class prediction | [External Price-149 benchmark](results/price149/) | Macro-F1 / weighted F1 | **0.72 / 0.72** |
 
 The original project report documents the experimental methodology, baseline comparisons and limitations. Selected original test outputs for Tasks 1 and 2 are included in [results/](results/).
 

@@ -1,0 +1,2 @@
+model,dataset,metric,value,source
+Task3Model,internal combined test,macro_f1,0.6953260225627327,task_3/notebooks/test.ipynb cell 7 (zero-based)
