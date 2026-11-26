@@ -3,7 +3,7 @@
 from pathlib import Path
 import numpy as np
 import torch
-from sklearn.decomposition import PCA
+from pca_transform import NpzPCA
 from task_1.src.models import build_model as build_task1
 from task_2.src.models import build_model as build_task2
 from task_3.src.models import Task3Model
@@ -26,10 +26,9 @@ def main():
         assert torch.isfinite(out_one).all()
         assert torch.isfinite(out_two).all()
 
-    # Fit synthetic PCA transforms only to test the interface.
-    samples = torch.randn(140, 1024).numpy()
-    pca_one = PCA(n_components=128, random_state=42).fit(samples)
-    pca_two = PCA(n_components=128, random_state=43).fit(samples)
+    # Load the recovered PCA transforms.
+    pca_one = NpzPCA(root / "checkpoints/pca/task1_pca_reconstructed.npz")
+    pca_two = NpzPCA(root / "checkpoints/pca/task2_pca_original.npz")
 
     # Check PCA transformations for numerical validity.
     test_input = torch.randn(4, 1024)

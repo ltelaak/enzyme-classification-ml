@@ -281,6 +281,21 @@ def dim_reduction_train_test(train_set:Task2Dataset, test_set:Task2Dataset, n_di
         dataset_to_h5(test_set, out_path / f'{test_set.name}.h5')
 
 def dim_reduction(dataset:Task2Dataset, n_dims:int, pca_path=''):
+    if pca_path and Path(pca_path).suffix == ".npz":
+        from pca_transform import NpzPCA
+
+        pca = NpzPCA(pca_path)
+        if pca.components_.shape[0] != n_dims:
+            raise ValueError("PCA output dimension mismatch.")
+
+        X = dataset.X
+        dataset.X = torch.as_tensor(
+            pca.transform(X.detach().cpu().numpy()),
+            dtype=X.dtype,
+            device=X.device
+        )
+        return
+
     if pca_path == '':
         pca = PCA(n_components=n_dims)
     else:

@@ -685,6 +685,21 @@ def generate_prott5_embeddings(path):
     return output_embeddings, key_list
 
 def dim_reduction(dataset:Task1Dataset, n_dims:int, pca_path=''):
+    if pca_path and Path(pca_path).suffix == ".npz":
+        from pca_transform import NpzPCA
+
+        pca = NpzPCA(pca_path)
+        if pca.components_.shape[0] != n_dims:
+            raise ValueError("PCA output dimension mismatch.")
+
+        X = dataset.X
+        dataset.X = torch.as_tensor(
+            pca.transform(X.detach().cpu().numpy()),
+            dtype=X.dtype,
+            device=X.device
+        )
+        return
+
     if pca_path == '':
         pca = PCA(n_components=n_dims)
     else:
