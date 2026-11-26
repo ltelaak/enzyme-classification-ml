@@ -1,0 +1,31 @@
+Fold 1:
+  validation_acc: 0.9115
+  tp: 1859.0
+  fn: 276.0
+  fp: 316.0
+  tn: 4236.0
+Fold 2:
+  validation_acc: 0.9139
+  tp: 1862.0
+  fn: 262.0
+  fp: 314.0
+  tn: 4249.0
+Fold 3:
+  validation_acc: 0.9064
+  tp: 1829.0
+  fn: 279.0
+  fp: 347.0
+  tn: 4232.0
+Fold 4:
+  validation_acc: 0.9164
+  tp: 1868.0
+  fn: 251.0
+  fp: 308.0
+  tn: 4260.0
+Fold 5:
+  validation_acc: 0.908
+  tp: 1830.0
+  fn: 270.0
+  fp: 345.0
+  tn: 4241.0
+Average accuracy: 0.91124

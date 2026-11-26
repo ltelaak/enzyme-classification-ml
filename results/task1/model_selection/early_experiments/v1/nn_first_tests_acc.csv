@@ -1,0 +1,115 @@
+﻿Number,Layers,Batch size,Learning rate,Threshold,Weight Decay,Optimizer,Loss,Epochs,Train/Val/Test,Graph,Dataset
+1,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.6,0,SGD,BCELoss,50,60/20/20,train_val_acc_1.png,final.tsv
+2,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.7,0,SGD,BCELoss,50,60/20/20,train_val_acc_2.png,final.tsv
+3,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0,SGD,BCELoss,50,60/20/20,train_val_acc_3.png,final.tsv
+4,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.4,0,SGD,BCELoss,50,60/20/20,train_val_acc_4.png,final.tsv
+5,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0,SGD,BCELoss,100,60/20/20,train_val_acc_5.png,final.tsv
+6,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.0001,SGD,BCELoss,100,60/20/20,train_val_acc_6.png,final.tsv
+7,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.001,SGD,BCELoss,100,60/20/20,train_val_acc_7.png,final.tsv
+8,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.01,SGD,BCELoss,100,60/20/20,train_val_acc_8.png,final.tsv
+9,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_9.png,final.tsv
+10,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.01,SGD,BCELoss,200,60/20/20,train_val_acc_10.png,final.tsv
+11,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.0005,SGD,BCELoss,100,60/20/20,train_val_acc_11.png,final.tsv
+12,"self.sigmoid_activation = nn.Sigmoid()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_12.png,final.tsv
+13,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 256, dtype=torch.float32)
+self.hidden_layer_3 = nn.Linear(256, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_13.png,final.tsv
+14,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.03,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_14.png,final.tsv
+15,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.006,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_15.png,final.tsv
+16,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.dropout = nn.Dropout(0.5)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_16.png,final.tsv
+17,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.dropout = nn.Dropout(0.5)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.dropout = nn.Dropout(0.5)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0.004,SGD,BCELoss,100,60/20/20,train_val_acc_17.png,final.tsv
+18,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.dropout = nn.Dropout(0.5)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0,SGD,BCELoss,100,60/20/20,train_val_acc_18.png,final.tsv
+19,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.dropout = nn.Dropout(0.25)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0,SGD,BCELoss,100,60/20/20,train_val_acc_19.png,final.tsv
+20,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.dropout = nn.Dropout(0.25)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0,SGD,BCELoss,100,60/20/20,train_val_acc_20.png,pp_task1_c50_15_70.tsv
+21,"self.le_relu = nn.LeakyReLU()
+self.hidden_layer_1 = nn.Linear(553, 369, dtype=torch.float32)
+self.dropout = nn.Dropout(0.25)
+self.hidden_layer_2 = nn.Linear(369, 128, dtype=torch.float32)
+self.output_layer = nn.Linear(128, 1, dtype=torch.float32)
+self.sigmoid = nn.Sigmoid()",32,0.01,0.5,0,SGD,BCELoss,100,60/20/20,train_val_acc_21.png,final1_c70_20_80.tsv
+

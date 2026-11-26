@@ -1,0 +1,26 @@
+model:
+  model_type: Task1Model
+  dims:
+  - 1024
+  - 683
+  - 683
+  - 1
+  dropouts:
+  - 0.5
+  - 0.3
+  activation:
+    name: LeakyReLU
+    negative_slope: 0.01
+  normalize: false
+  dtype: torch.float32
+training:
+  optimizer:
+    name: SGD
+    lr: 0.001
+    weight_decay: 0
+  loss_fn: BCELoss
+  epochs: 200
+dataset:
+  name: embeddings_exp_proteins_clustered_100_filter_lens_25-75_undersampled_prot_t5
+  size: 50200
+  feature_dim: (1024,)

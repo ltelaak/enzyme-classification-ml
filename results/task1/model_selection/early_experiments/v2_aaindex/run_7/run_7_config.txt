@@ -1,0 +1,12 @@
+structure: 'Sequential(   (0): Linear(in_features=553, out_features=369, bias=True)   (1):
+  Sigmoid()   (2): Linear(in_features=369, out_features=128, bias=True)   (3): Sigmoid()   (4):
+  Linear(in_features=128, out_features=1, bias=True)   (5): Sigmoid() )'
+optim: Adam
+lr: 0.002
+loss_fn: BCELoss
+activation: Sigmoid
+batch_size: 32
+epochs: 100
+test_loss: 0.4532
+test_acc: 0.7912
+test_mcc: 0.5832

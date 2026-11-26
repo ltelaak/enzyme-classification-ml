@@ -40,6 +40,10 @@ The historical preprocessing and feature-comparison notebooks are retained under
 
 The original [feature/classifier search exports](results/feature_comparison/gridsearch_model_comparison/) and [later baseline comparison figures](results/baselines/) document the exploratory path to the compact neural classifiers. Their experimental conditions are not assumed identical; the older ProtT5 RF grid-search export records a higher MCC than the final FNN, and its exact original split is unverified.
 
+## Task 1 model development
+
+The [Task 1 model selection archive](results/task1/model_selection/) retains all 147 historical local CV configurations and 132 available metric files, earlier AAindex experiments, and the complete selected run 131. See [final training and test figures](results/task1/) for the historical model and its original checkpoint.
+
 ## Results
 
 These are results from the original collaborative project, not from a new run of the portfolio code.
@@ -79,14 +83,14 @@ python -m scripts.smoke_test
 
 The smoke test uses randomly initialized models, synthetic embeddings and synthetic PCA transforms. It checks model interfaces only; it does not reproduce the reported classification scores. This portfolio adaptation has not yet been executed end to end.
 
-The selected research modules are available for code review. Their broader dependencies are listed in `requirements-research.txt`, which reflects the original environment plus additional imports. Full reproduction requires the original sequence datasets, clustering outputs, embeddings, fitted PCA transforms and model checkpoints, which are not distributed here. The historical training and preprocessing utilities have not been fully revalidated in a clean environment.
+The selected research modules are available for code review. Their broader dependencies are listed in `requirements-research.txt`, which reflects the original environment plus additional imports. Full reproduction requires the original sequence datasets, clustering outputs, embeddings, fitted PCA transforms and model checkpoints. The original Task 1 checkpoint is included; datasets and fitted PCA transforms remain unavailable here. The historical training and preprocessing utilities have not been fully revalidated in a clean environment.
 
 ## Implementation notes and limitations
 
 - Task 3 was adapted to accept trained classifiers and fitted PCA transformers explicitly instead of loading files from machine-specific paths.
 - The original Task 1 and Task 2 network implementations and saved configurations are retained. The saved Task 2 configuration records AdamW with learning rate 0.001, and the implementation includes a final sigmoid. The report describes a learning rate of 0.01 and a linear output layer. These historical discrepancies are recorded rather than silently changing the experiment.
 - Predictions are limited to the first EC level and a single label per protein. This is a research prototype, not a production annotation system.
-- Large datasets, raw embeddings, model checkpoints and most intermediate logs are excluded. Selected archival research notebooks are included; they have not been rerun.
+- Large datasets, raw embeddings and most intermediate logs are excluded. The original Task 1 checkpoint is included pending publication approval. Selected archival research notebooks are included; they have not been rerun.
 
 ## Authors and contributions
 

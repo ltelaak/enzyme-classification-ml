@@ -1,0 +1,13 @@
+structure: 'Sequential(   (0): Linear(in_features=553, out_features=369, bias=True)   (1):
+  LeakyReLU(negative_slope=0.01)   (2): Linear(in_features=369, out_features=128,
+  bias=True)   (3): LeakyReLU(negative_slope=0.01)   (4): Linear(in_features=128,
+  out_features=1, bias=True)   (5): Sigmoid() )'
+optim: Adam
+lr: 0.002
+loss_fn: BCELoss
+activation: LeakyReLU
+batch_size: 16
+epochs: 100
+test_loss: 0.4728
+test_acc: 0.7768
+test_mcc: 0.556
