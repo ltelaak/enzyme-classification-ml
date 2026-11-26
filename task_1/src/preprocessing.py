@@ -10,9 +10,6 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, EsmModel, T5EncoderModel, T5Tokenizer
 from pathlib import Path
 import os
-from esm.models.esm3 import ESM3
-from esm.models.esmc import ESMC
-from esm.sdk.api import ESMProtein, SamplingConfig, LogitsConfig
 from protlearn.features import aaindex1, aac, paac
 from Bio import SeqIO
 from sklearn.decomposition import PCA
@@ -435,6 +432,11 @@ def per_protein_embeddings(batch_result, i):
 
 def generate_prott5_embeddings(path):
     model_name = "Rostlab/prot_t5_xl_half_uniref50-enc"  
+
+    if model_name.startswith("EvolutionaryScale/"):
+        from esm.models.esm3 import ESM3
+        from esm.models.esmc import ESMC
+        from esm.sdk.api import ESMProtein, SamplingConfig, LogitsConfig
 
     embedding_type = "per_prot"  
 

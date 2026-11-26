@@ -30,5 +30,3 @@ task2 (2, 7)
 ```
 
 Each classifier expects real embeddings projected with its own training-set PCA. The original fitted transformers are unavailable here. The historical evaluations are archived under [Task 1](../results/task1/) and [Task 2](../results/task2/).
-
-The project is private pending team approval for publication of the weights.

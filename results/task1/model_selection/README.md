@@ -18,7 +18,7 @@ For a compact CSV view of configurations and metrics, from the repository root r
 python scripts/summarize_task1_runs.py > task1_runs_summary.csv
 ```
 
-This new read-only helper derives mean fold MCC from recorded confusion counts where available; missing fields remain blank and parse errors are flagged. It has not been executed against the complete archive here. Historical data conditions vary across runs; do not rank them globally without checking the dataset and evaluation protocol.
+The script read all 147 run folders without a parsing error and derived mean fold MCC from the confusion counts for the 132 runs with metrics. Historical data conditions vary across runs; do not rank them globally without checking the dataset and evaluation protocol.
 
 ## Run 131 and final configuration
 
@@ -41,4 +41,4 @@ Run 131 recorded mean validation accuracy 0.91542. The final dataset contained 3
 
 ![Original run 131 CV loss](run_131/run_131_loss.png)
 
-The historical [model_selection.py](../../../task_1/model_selection.py) and [main.py](../../../task_1/main.py) are retained with local paths adapted; the latter now loads the original checkpoint from the curated location for its evaluation call. These research entrypoints require original data, have not been rerun and may still use historical output directories. See [final results](../README.md).
+The historical [model_selection.py](../../../task_1/model_selection.py) and [main.py](../../../task_1/main.py) are retained with local paths adapted; the latter now loads the original checkpoint from the curated location for its evaluation call. The evaluation in `main.py` reproduced the saved test confusion matrix with the original embeddings. The historical training and cross-validation runs require their datasets and were not repeated. See [final results](../README.md).

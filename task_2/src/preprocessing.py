@@ -16,9 +16,6 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, EsmModel, T5EncoderModel, T5Tokenizer
 from pathlib import Path
 import os
-from esm.models.esm3 import ESM3
-from esm.models.esmc import ESMC
-from esm.sdk.api import ESMProtein, SamplingConfig, LogitsConfig
 
 class Task2Dataset(Dataset):
     '''
@@ -222,7 +219,7 @@ def filter_h5_from_fasta(h5_path:str | Path, fasta_path:str | Path, out_path:str
                 if temp_key in fasta_key_list:
                     key_index = fasta_key_list.index(temp_key)
                     fasta_label = fasta_label_list[key_index]
-                    h5_out.create_dataset(name=f'{key.split('|')[0]}| EC={fasta_label}', data=h5.get(key)[:])
+                    h5_out.create_dataset(name=f"{key.split('|')[0]}| EC={fasta_label}", data=h5.get(key)[:])
 
 
 def create_dataset_from_h5(h5_path:str | Path, name:str='', unsqueeze:bool=True, multiclass=False):
@@ -415,6 +412,11 @@ def create_dataset_from_fasta(fasta_path:str | Path, name:str='', features:str='
 
 def generate_prott5_embeddings(path):
     model_name = "Rostlab/prot_t5_xl_half_uniref50-enc"  
+
+    if model_name.startswith("EvolutionaryScale/"):
+        from esm.models.esm3 import ESM3
+        from esm.models.esmc import ESMC
+        from esm.sdk.api import ESMProtein, SamplingConfig, LogitsConfig
 
     embedding_type = "per_prot"  
 

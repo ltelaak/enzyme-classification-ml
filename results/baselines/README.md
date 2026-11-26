@@ -22,4 +22,16 @@ The [grid-search exports](../feature_comparison/gridsearch_model_comparison/) ar
 
 ## Task 2: EC classification
 
-The original [Random Forest notebook](../../task_2/notebooks/task2_random_forest.ipynb) uses `RandomForestClassifier(class_weight='balanced')`, five-fold default scikit-learn CV with balanced accuracy, macro-F1 and MCC, and logs test metrics to W&B. The original source includes an external upload; it must not be executed without permission. The notebook's input filenames describe a non-undersampled split, while the W&B upload points to an undersampled file. The two saved PNG outputs from original cell 6 are preserved in [task2/](task2/), without attributing unsupported numerical metrics or equating that experiment with the final neural-network dataset. Its W&B summary is not included in this stage.
+The [random forest notebook](../../task_2/notebooks/task2_random_forest.ipynb) uses balanced class weights and five-fold cross-validation. It tracks balanced accuracy, macro-F1 and MCC. The [two saved plots](task2/) come from that experiment. The training input is labelled as a split without undersampling. The notebook also records an optional W&B file upload for a different, undersampled dataset.
+
+Figure 9 of the final report compares the classifiers on the 1,178-enzyme test set across 1,000 bootstrap samples. The text in section 3.2.2 identifies the “Linear Regression” bar as logistic regression.
+
+| Classifier | Macro-F1 | Bootstrap standard deviation |
+|---|---:|---:|
+| Dummy classifier | 0.06 | 0.002 |
+| Random forest | 0.44 | 0.022 |
+| Logistic regression | 0.58 | 0.020 |
+| Linear SVC | 0.60 | 0.019 |
+| Task 2 neural network | 0.74 | 0.016 |
+
+The [Task 2 test record](../task2/#held-out-test-verification) gives the unrounded network score and identifies the available test data.

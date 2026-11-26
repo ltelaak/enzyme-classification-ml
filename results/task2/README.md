@@ -9,6 +9,12 @@ The EC classifier assigns an enzyme to one of seven main classes using 128 PCA-r
 | Final training | [Research notebook](../../task_2/notebooks/nn_model_selection.ipynb) and [saved configuration](../../configs/task2.yaml) | AdamW, dropout 0.11765, weight decay 0.03425. The manual CV cell passes learning rate 0.0104079. The final cell sets that variable but omits it from the AdamW call. The saved training configuration records 0.001. |
 | Held-out evaluation | [Original test metrics](../task2_test_metrics.txt) and [confusion matrix](final/confusion_matrix.png) | On 1,178 enzymes: macro-F1 0.74162, MCC 0.72385, balanced accuracy 0.74401. |
 
+### Held-out test verification
+
+The original inference export (`8351126b089050e908d8b788a645133b1c22e1c0`) records the protein ID, true EC class and predicted EC class for each of the 1,178 enzymes. Recounting those predictions reproduces all 49 cells of the saved confusion matrix and a macro-F1 of 0.74162. The report’s [bootstrap comparison with four baselines](../baselines/#task-2-ec-classification) rounds the network result to 0.74. The report’s class-wise recall values also differ in places from the saved matrix. For example, EC 1 has 261 correct predictions out of 300 (87%) in the saved run.
+
+The local 128-dimensional test file has the same name, size in examples and class counts as the archived evaluation, but only 364 protein IDs in common. Applying the portfolio checkpoint to that file yields macro-F1 0.21407. Its relation to the checkpoint’s training set and fitted PCA is unknown, so this run cannot establish performance on the historical test split. Repeating the original inference requires the matching projected embeddings or the original embeddings and fitted PCA.
+
 ### Reading the search exports
 
 Each CSV preserves one database snapshot, including unsuccessful trials. [db_trials.csv](optuna/db_trials.csv) has 4,707 rows from 41 studies. [luis_trials.csv](optuna/luis_trials.csv) has 2,873 rows from 32 studies. The snapshots overlap. Identify records by database, study and trial number. A different trial 218 in the first database belongs to `broad_search_one_layer_every_dataset_v1`.
@@ -19,6 +25,6 @@ The columns record Optuna state, stored numerical objectives by index, and sampl
 
 [Loss curve](final/loss_curve.png) · [Macro-F1 curve](final/macro_f1_curve.png) · [Task 2 weights](../../checkpoints/task2.pth)
 
-The two training curves, confusion matrix and state dictionary are byte-identical to the files in the original model directory for the usamp2000 dataset. The checkpoint loads into the archived network and produced finite outputs of shape (2, 7) for two synthetic 128-dimensional inputs. Reproducing the test scores requires the historical data and fitted PCA.
+The two training curves, confusion matrix and state dictionary are byte-identical to the files in the original model directory for the usamp2000 dataset. The checkpoint loads into the archived network and produces seven scores per enzyme. Inference from raw ProtT5 embeddings requires the PCA fitted alongside those weights.
 
-The CSVs were exported from the original SQLite files (Git blobs `53ff546811eb6e05443fd458e9fb92ded20153b8` and `03d16438f560e02aa589038c1dfede19a910d001`). The W&B fold table matched its recorded SHA-256. The three locally available W&B curve images differed from the hashes in that run summary and are excluded. The training figures linked above come from the final model directory. The curated notebook retains the original research cells with outputs cleared, portable data paths and a checkpoint evaluation cell adapted to the portfolio layout.
+The CSVs were exported from the original SQLite files (Git blobs `53ff546811eb6e05443fd458e9fb92ded20153b8` and `03d16438f560e02aa589038c1dfede19a910d001`). The portfolio includes the selected W&B run. Its exported summary fields and all five fold rows match the original run, and the original fold table matches the SHA-256 in its tracking record. The three locally available W&B curve images differed from the hashes in that run summary and are excluded. The training figures linked above come from the final model directory. The curated notebook retains the original research cells with outputs cleared, portable data paths and a checkpoint evaluation cell adapted to the portfolio layout.

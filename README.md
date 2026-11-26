@@ -9,7 +9,7 @@ Given a protein sequence, can we detect whether it is an enzyme and predict its 
 | Experiment | Code and model selection | Historical evaluation |
 |---|---|---|
 | Task 1 · Enzyme detection | [Feature comparisons from one-hot encoding to ProtT5 + NN](task_1/notebooks/README.md) · [NN selection and run 131](results/task1/model_selection/) | **0.8203 MCC** on 5,901 proteins. The closest classical models in the final comparison reached about 0.74. [Test output](results/task1_test_metrics.txt) |
-| Task 2 · EC main class | [Optuna and W&B notebook](task_2/notebooks/nn_model_selection.ipynb) · [Trial exports and validation folds](results/task2/) | **0.7416 macro-F1** on 1,178 enzymes. [Test output](results/task2_test_metrics.txt) |
+| Task 2 · EC main class | [Optuna and W&B notebook](task_2/notebooks/nn_model_selection.ipynb) · [Trial exports and validation folds](results/task2/) | **0.7416 macro-F1** from the archived predictions for 1,178 enzymes. [Test output](results/task2_test_metrics.txt) · [Baseline comparison](results/baselines/#task-2-ec-classification) |
 | Task 3 · Combined prediction | [Hierarchical model](task_3/src/models.py) | **0.6953 macro-F1** across eight classes. [Internal evaluation](results/task3/) |
 | Price-149 · External evaluation of Task 2 | Training data filtered for similarity to Price-149 | **0.72 macro-F1 and 0.72 weighted F1** on 149 enzymes, as reported in the project report. [Benchmark figure and scores](results/price149/) |
 
@@ -34,7 +34,9 @@ python -m scripts.smoke_test
 
 The smoke test checks the three model interfaces using synthetic embeddings, newly fitted PCA transforms and randomly initialized networks. To run the **two original trained classifiers**, use the [checkpoint example](checkpoints/README.md) in the same environment.
 
-The repository includes both checkpoints and their configurations. Reproducing the historical test scores requires the original held-out embeddings and labels. Starting from raw ProtT5 embeddings also requires the two fitted PCA transforms. Those data and transforms are absent from this portfolio. The [research dependencies](requirements-research.txt) cover the broader notebook workflow.
+With the original test embeddings supplied locally, the Task 1 checkpoint reproduces the reported MCC and confusion matrix. For Task 2, the archived predictions confirm the score. The available embedding file contains a different set of proteins. [Task 2 verification](results/task2/#held-out-test-verification)
+
+This repository includes both checkpoints and their configurations. The test data and the two fitted PCA transforms are outside the portfolio. The [research dependencies](requirements-research.txt) cover the broader notebook workflow.
 
 ## Authors and contributions
 
