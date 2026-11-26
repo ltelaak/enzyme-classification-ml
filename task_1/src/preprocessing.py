@@ -10,6 +10,7 @@ from tqdm import tqdm
 from transformers import AutoTokenizer, EsmModel, T5EncoderModel, T5Tokenizer
 from pathlib import Path
 import os
+from tempfile import TemporaryDirectory
 from protlearn.features import aaindex1, aac, paac
 from Bio import SeqIO
 from sklearn.decomposition import PCA
@@ -660,28 +661,28 @@ def generate_prott5_embeddings(path):
         model_name, model_name.replace("/", "_")
     )
 
-    output_file = Path('../temp/test').with_name(f'infer_temp_embeddings_{fasta_path.stem}_{short_model_key}.h5')
+    with TemporaryDirectory(prefix="prott5_") as temp_dir:
+        output_file = Path(temp_dir) / (f'infer_temp_embeddings_{fasta_path.stem}_{short_model_key}.h5')
 
-    headers, sequences = read_fasta(fasta_path)
-    df = pd.DataFrame({"header": headers, "sequence": sequences})
-    print(f"Processing {len(df)} sequences for model {model_name}...")
+        headers, sequences = read_fasta(fasta_path)
+        df = pd.DataFrame({"header": headers, "sequence": sequences})
+        print(f"Processing {len(df)} sequences for model {model_name}...")
 
-    create_embedding(
-        model_name,
-        df,
-        emb_type=embedding_type,
-        output_file=output_file,
-        max_len=max_sequence_length,
-    )
+        create_embedding(
+            model_name,
+            df,
+            emb_type=embedding_type,
+            output_file=output_file,
+            max_len=max_sequence_length,
+        )
 
-    with h5py.File(output_file, 'r') as f:
-        key_list = list(f.keys())
-        embeddings_list = list()
+        with h5py.File(output_file, 'r') as f:
+            key_list = list(f.keys())
+            embeddings_list = list()
     
-        for key in key_list:
-            embeddings_list.append(f[key][:])
-    output_embeddings = torch.tensor(np.array(embeddings_list), dtype=torch.float32)
-    os.remove(output_file)
+            for key in key_list:
+                embeddings_list.append(f[key][:])
+        output_embeddings = torch.tensor(np.array(embeddings_list), dtype=torch.float32)
     return output_embeddings, key_list
 
 def dim_reduction(dataset:Task1Dataset, n_dims:int, pca_path=''):

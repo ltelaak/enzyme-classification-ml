@@ -8,13 +8,15 @@ from matplotlib import colormaps
 import matplotlib.pyplot as plt
 import numpy as np
 
+ROOT = Path(__file__).resolve().parents[2]
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
    
-def infer(model, dataset, metrics=True, fasta=False, dim_reduce=False):
+def infer(model, dataset, metrics=True, fasta=False, dim_reduce=False, pca_path=None):
     print(f'Total sequences to infer: {len(dataset)}')
 
     if dim_reduce:
-        dim_reduction(dataset=dataset, n_dims=128, pca_path='task_1/data/embeddings/embeddings_uniprot_exp_proteins_c30_flens2-98_enz/embeddings_uniprot_exp_proteins_c30_flens2-98_enz_train_pca.pkl')
+        dim_reduction(dataset=dataset, n_dims=128, pca_path=pca_path or ROOT / "checkpoints/pca/task1_pca_reconstructed.npz")
     
     if isinstance(model, str):
         pretrained = True
@@ -22,11 +24,8 @@ def infer(model, dataset, metrics=True, fasta=False, dim_reduce=False):
         pretrained = False
 
     if pretrained:
-        model_dir_path = Path.cwd() / Path(f'task_1/results/models/{model}')
-        if not model_dir_path.exists():
-            raise Exception('Pretrained model was not found!')
-        infer_path = model_dir_path / f'infer_{dataset.name}'
-        infer_path.mkdir(exist_ok=True)
+        infer_path = ROOT / "outputs" / "task1" / model / f"infer_{dataset.name}"
+        infer_path.mkdir(parents=True, exist_ok=True)
 
         if dataset.y is None:
             metrics = False
@@ -42,24 +41,26 @@ def infer(model, dataset, metrics=True, fasta=False, dim_reduce=False):
     model.eval()
 
     with torch.no_grad():
-        preds = model(dataset.X)
+        param = next(model.parameters())
+        preds = model(dataset.X.to(device=param.device, dtype=param.dtype))
         if pretrained:
             with open(output_file, 'w') as file:
                 for i in range(0, len(dataset)):
                     file.write(dataset.keys[i] + ';' + f'{preds[i].item():.0f}' + '\n')
             print('Saved inference results to: ' + str(output_file.resolve()))
 
-    if metrics:
-        preds_rounded = torch.round(preds).cpu().numpy()
-        acc = accuracy_score(dataset.y, preds_rounded)
-        mcc = matthews_corrcoef(dataset.y, preds_rounded)
-        auc = roc_auc_score(dataset.y, preds_rounded)
-        conf_display = ConfusionMatrixDisplay.from_predictions(dataset.y, preds_rounded, cmap=colormaps.get('Greens'), display_labels=["Non-Enzyme", "Enzyme"], normalize='all', values_format='.1%')
+    if metrics and dataset.y is not None:
+        labels = torch.as_tensor(dataset.y).detach().cpu().numpy().reshape(-1)
+        preds_rounded = torch.round(preds).cpu().numpy().reshape(-1)
+        acc = accuracy_score(labels, preds_rounded)
+        mcc = matthews_corrcoef(labels, preds_rounded)
+        auc = roc_auc_score(labels, preds_rounded)
+        conf_display = ConfusionMatrixDisplay.from_predictions(labels, preds_rounded, cmap=colormaps.get('Greens'), display_labels=["Non-Enzyme", "Enzyme"], normalize='all', values_format='.1%')
         conf_display.im_.colorbar.remove()
         conf_display.ax_.set_ylabel("Actual label")
-        for labels in conf_display.text_.ravel():
-            labels.set_fontsize(20)
-        conf = confusion_matrix(dataset.y, preds_rounded)
+        for annotation in conf_display.text_.ravel():
+            annotation.set_fontsize(20)
+        conf = confusion_matrix(labels, preds_rounded)
 
 
         print('Inference metrics:')
@@ -81,7 +82,7 @@ def infer(model, dataset, metrics=True, fasta=False, dim_reduce=False):
 def infer_fasta(model_name, fasta_path, metrics=False, error_bars=False, n_samples=0):
     dataset = create_dataset_from_fasta(fasta_path=fasta_path, features='prott5', unsqueeze=True)
 
-    infer(model_name=model_name, dataset=dataset, metrics=metrics, fasta=True, dim_reduce=True)
+    infer(model=model_name, dataset=dataset, metrics=metrics, fasta=True, dim_reduce=True)
 
 
 def main():
@@ -94,8 +95,8 @@ def main():
     infer_fasta(args.model_name, args.fasta_path, args.metrics)
 
 if __name__ == '__main__':
-    from models import build_model
-    from preprocessing import generate_prott5_embeddings, Task1Dataset, create_dataset_from_fasta
+    from task_1.src.models import build_model, build_model_from_pretrained
+    from task_1.src.preprocessing import dim_reduction, generate_prott5_embeddings, Task1Dataset, create_dataset_from_fasta
     main()
 
 else:

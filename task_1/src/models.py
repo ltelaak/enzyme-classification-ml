@@ -56,13 +56,22 @@ def build_model(model_config):
             dtype = torch.float32
     return model_type(dims=dims, dropouts=dropouts, activation=activation, normalize=normalize, dtype=dtype).to(device=device)
 
-def build_model_from_pretrained(model_name):
-    model_path = (Path(__file__).parent / Path(f'../results/models/{model_name}')).resolve()
-    config_file = model_path / f'{model_name}_config.yaml'
-    if model_path.exists():
-        model = build_model(config_file)
+def build_model_from_pretrained(model_name="task1"):
+    root = Path(__file__).resolve().parents[2]
+
+    if model_name == "task1":
+        config_file = root / "configs/task1.yaml"
+        model_file = root / "checkpoints/task1.pth"
     else:
-        raise Exception("A model with that name doesn't exist.")
-    model_file = model_path / f'{model_name}.pth'
-    model.load_state_dict(torch.load(model_file, map_location=torch.device('cpu')))
+        model_path = root / "task_1/results/models" / model_name
+        config_file = model_path / f"{model_name}_config.yaml"
+        model_file = model_path / f"{model_name}.pth"
+
+    if not config_file.is_file() or not model_file.is_file():
+        raise FileNotFoundError(f"Pretrained model not found: {model_name}")
+
+    model = build_model(config_file)
+    model.load_state_dict(
+        torch.load(model_file, map_location="cpu", weights_only=True)
+    )
     return model
