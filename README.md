@@ -1,85 +1,29 @@
-# Enzyme classification with protein language model embeddings
+# Enzyme classification with ProtT5 embeddings
 
-A lightweight, hierarchical machine learning approach to enzyme detection and first-level Enzyme Commission (EC) classification.
+**Rostlab · Joint B.Sc. Bioinformatics, LMU & TUM**
 
-**Academic project · Rostlab · Joint B.Sc. Bioinformatics, LMU & TUM**
+Given a protein sequence, can we detect whether it is an enzyme and predict its main Enzyme Commission (EC) class? We compared sequence encodings and classical classifiers, then trained two feed-forward networks on ProtT5 embeddings. Each network uses its own PCA to reduce 1,024 dimensions to 128. The combined model returns 0 for a predicted non-enzyme or a single EC class from 1 to 7.
 
-## Overview
+## Experiments and results
 
-This repository is a curated portfolio version of a collaborative academic machine learning project completed at the Rostlab as part of the joint B.Sc. Bioinformatics program at LMU and TUM. The original development took place in a separate project environment. This repository was subsequently created to document the project's methodology, implementation and results.
+| Experiment | Code and model selection | Historical evaluation |
+|---|---|---|
+| Task 1 · Enzyme detection | [Feature comparisons from one-hot encoding to ProtT5 + NN](task_1/notebooks/README.md) · [NN selection and run 131](results/task1/model_selection/) | **0.8203 MCC** on 5,901 proteins. The closest classical models in the final comparison reached about 0.74. [Test output](results/task1_test_metrics.txt) |
+| Task 2 · EC main class | [Optuna and W&B notebook](task_2/notebooks/nn_model_selection.ipynb) · [Trial exports and validation folds](results/task2/) | **0.7416 macro-F1** on 1,178 enzymes. [Test output](results/task2_test_metrics.txt) |
+| Task 3 · Combined prediction | [Hierarchical model](task_3/src/models.py) | **0.6953 macro-F1** across eight classes. [Internal evaluation](results/task3/) |
+| Price-149 · External evaluation of Task 2 | Training data filtered for similarity to Price-149 | **0.72 macro-F1 and 0.72 weighted F1** on 149 enzymes, as reported in the project report. [Benchmark figure and scores](results/price149/) |
 
-The project investigated whether compact feed-forward neural networks could classify proteins effectively using information-rich protein language model embeddings, rather than relying on large task-specific networks.
+### Data and model choices
 
-## Methodology
+Task 1 uses binary enzyme labels. Task 2 starts with experimentally annotated enzymes, clusters sequences within each EC main class and caps the largest classes at 2,000 examples before splitting. The [data preparation notes](docs/data_preparation.md) give the sequence counts and filtering steps for both tasks.
 
-```mermaid
-flowchart TD
-    A[Protein sequence] --> B[ProtT5 embedding: 1024 dimensions]
-    B --> C[Task 1 PCA: 128 dimensions]
-    B --> D[Task 2 PCA: 128 dimensions]
-    C --> E[Task 1: binary enzyme detection]
-    D --> F[Task 2: EC main class prediction]
-    E --> G{Enzyme?}
-    G -->|No| H[Class 0]
-    G -->|Yes| I[Use Task 2 prediction: EC 1–7]
-    F --> I
-```
+For Task 1, ProtT5 performed best across three classical classifiers in the presentation's encoding comparison. On the final ProtT5 test set, the **128–128–64–1 neural network** scored highest. An older [random forest grid-search export](results/feature_comparison/gridsearch_model_comparison/prott5/prott5_rf.tsv) records a higher MCC under an unverified split. The [comparison notes](results/baselines/) explain which scores can be compared.
 
-- **Data preparation:** experimentally annotated UniProt protein sequences; MMseqs2 clustering at a 30% sequence similarity threshold, length filtering and class balancing.
-- **Feature extraction:** pretrained ProtT5 protein embeddings, reduced from 1,024 to 128 dimensions with PCA.
-- **Task 1:** binary classification using a compact 128–128–64–1 feed-forward network.
-- **Task 2:** classification into seven EC main classes using a 128–256–7 network.
-- **Task 3:** hierarchical integration of the two classifiers.
-- **Model selection:** stratified cross-validation and iterative local experiments for Task 1; Optuna hyperparameter optimization and Weights & Biases tracking for Task 2; comparison against classical baselines.
+For Task 2, the selected **128–256–7 network** matches the parameters of Optuna trial 218 in the Luis database. Optuna records that trial as failed. The five stored W&B folds give a mean macro-F1 of 0.7502. Cross-validation used a learning rate of 0.0104079 and the final AdamW configuration records 0.001. The implementation retains the final sigmoid, which differs from the linear output described in the report. [Task 2 experiment record](results/task2/README.md)
 
-## Research notebooks and data preparation
+## Run the models
 
-The historical preprocessing and feature-comparison notebooks are retained under the respective task directories. See [data preparation and feature engineering](docs/data_preparation.md) for the documented final datasets and [original clustering-threshold results](results/data_analysis/task1_clustering/) for exploratory comparisons. Notebook outputs were cleared and local paths made relative; the notebooks are archival and have not been rerun. Original datasets and embeddings are not distributed.
-
-## Baseline and feature comparisons
-
-[Task 1: from one-hot encoding to the final ProtT5 neural network](task_1/notebooks/README.md#from-one-hot-encoding-to-the-final-neural-network) follows the comparisons from the project talk, with figures and links to the experiment code.
-
-The original [feature/classifier search exports](results/feature_comparison/gridsearch_model_comparison/) and [later baseline comparison figures](results/baselines/) document the exploratory path to the compact neural classifiers. Their experimental conditions are not assumed identical; the older ProtT5 RF grid-search export records a higher MCC than the final FNN, and its exact original split is unverified.
-
-## Task 1 model development
-
-The [Task 1 model selection archive](results/task1/model_selection/) retains all 147 historical local CV configurations and 132 available metric files, earlier AAindex experiments, and the complete selected run 131. See [final training and test figures](results/task1/) for the historical model and its original checkpoint.
-
-## Task 2 model selection and evaluation
-
-The [EC model selection record](results/task2/README.md) connects the Optuna trial parameters, five W&B validation folds, final training configuration and held-out evaluation. The selected parameters match trial 218 in the Luis database. Its Optuna state is `FAIL`; the cross-validation score comes from the W&B fold table. The [archived notebook](task_2/notebooks/nn_model_selection.ipynb) shows how the learning rate changed between cross-validation and final training.
-
-## Results
-
-These are results from the original collaborative project, not from a new run of the portfolio code.
-
-| Task | Evaluation dataset | Metric | Result |
-|---|---|---|---:|
-| Binary enzyme detection | Internal test set (5,901 proteins) | MCC | **0.82** |
-| EC main class prediction | Internal test set (1,178 enzymes) | Macro-F1 | **0.74** |
-| Hierarchical non-enzyme / EC 1–7 prediction | [Internal combined test](results/task3/) | Macro-F1 | **0.6953** |
-| EC main class prediction | [External Price-149 benchmark](results/price149/) | Macro-F1 / weighted F1 | **0.72 / 0.72** |
-
-The original project report documents the experimental methodology, baseline comparisons and limitations. Selected original test outputs for Tasks 1 and 2 are included in [results/](results/).
-
-## Repository layout
-
-```text
-task_1/src/       Binary classifier and research utilities
-task_2/src/       Multiclass classifier and research utilities
-task_3/src/       Portable hierarchical model adapter
-configs/         Selected original model configurations
-task_1/notebooks/ Historical preprocessing and feature/classifier comparisons
-task_2/notebooks/ Historical preprocessing, Random Forest baseline and NN selection
-results/         Selected original experimental and test results
-docs/            Research methodology and archival notes
-scripts/         Synthetic model-interface smoke test
-```
-
-## Getting started
-
-For the model-interface demonstration, use Python 3.11 or 3.12 in a clean virtual environment from the repository root:
+From the repository root, set up Python 3.11 or 3.12:
 
 ```bash
 python -m venv .venv
@@ -88,16 +32,9 @@ python -m pip install -r requirements.txt
 python -m scripts.smoke_test
 ```
 
-The smoke test uses randomly initialized models, synthetic embeddings and synthetic PCA transforms. It checks model interfaces only; it does not reproduce the reported classification scores. This portfolio adaptation has not yet been executed end to end.
+The smoke test checks the three model interfaces using synthetic embeddings, newly fitted PCA transforms and randomly initialized networks. To run the **two original trained classifiers**, use the [checkpoint example](checkpoints/README.md) in the same environment.
 
-The selected research modules are available for code review. Their broader dependencies are listed in `requirements-research.txt`, which reflects the original environment plus additional imports. Full reproduction requires the original sequence datasets, clustering outputs, embeddings, fitted PCA transforms and model checkpoints. Both original classifier checkpoints are included; datasets and fitted PCA transforms remain unavailable here. The historical training and preprocessing utilities have not been fully revalidated in a clean environment.
-
-## Implementation notes and limitations
-
-- Task 3 was adapted to accept trained classifiers and fitted PCA transformers explicitly instead of loading files from machine-specific paths.
-- The original Task 1 and Task 2 network implementations and saved configurations are retained. The saved Task 2 configuration records AdamW with learning rate 0.001, and the implementation includes a final sigmoid. The report describes a learning rate of 0.01 and a linear output layer. These historical discrepancies are recorded rather than silently changing the experiment.
-- Predictions are limited to the first EC level and a single label per protein. This is a research prototype, not a production annotation system.
-- Large datasets, raw embeddings and most intermediate logs are excluded. The original Task 1 and Task 2 checkpoints are included pending publication approval. Selected archival research notebooks are included; they have not been rerun.
+The repository includes both checkpoints and their configurations. Reproducing the historical test scores requires the original held-out embeddings and labels. Starting from raw ProtT5 embeddings also requires the two fitted PCA transforms. Those data and transforms are absent from this portfolio. The [research dependencies](requirements-research.txt) cover the broader notebook workflow.
 
 ## Authors and contributions
 

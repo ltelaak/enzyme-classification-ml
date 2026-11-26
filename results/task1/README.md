@@ -4,7 +4,7 @@ Historical results, not newly executed experiments.
 
 - [Model selection and original CV archive](model_selection/)
 - [Final model configuration](../../configs/task1.yaml)
-- [Original checkpoint](../../checkpoints/task1.pth) (preserved byte-for-byte; not loaded or revalidated)
+- [Original checkpoint](../../checkpoints/task1.pth) (verified against the original and loaded with synthetic inputs)
 - [Original held-out test metrics](../task1_test_metrics.txt)
 
 | Metric | Recorded value |
