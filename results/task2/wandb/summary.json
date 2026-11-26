@@ -1,0 +1,19 @@
+{
+  "dataset": "embeddings_uniprot_exp_enzymes_c30_flens2-98_usamp2000_exp_train85_dim128",
+  "dims": [
+    128,
+    256,
+    7
+  ],
+  "dropouts": [
+    0.11764897516223502
+  ],
+  "lr": 0.010407922166686871,
+  "weight_decay": 0.03424566834898443,
+  "epochs": 200,
+  "cv_balanced_acc": 0.7543903470039368,
+  "cv_macro_f1": 0.7501832008361816,
+  "cv_mcc": 0.7267132759094238,
+  "overfitting_metric_loss": 0.13395038300153145,
+  "overfitting_metric_f1": 0.28048320311045527
+}
