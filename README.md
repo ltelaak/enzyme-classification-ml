@@ -38,6 +38,8 @@ The historical preprocessing and feature-comparison notebooks are retained under
 
 ## Baseline and feature comparisons
 
+[Task 1: from one-hot encoding to the final ProtT5 neural network](task_1/notebooks/README.md#from-one-hot-encoding-to-the-final-neural-network) follows the comparisons from the project talk, with figures and links to the experiment code.
+
 The original [feature/classifier search exports](results/feature_comparison/gridsearch_model_comparison/) and [later baseline comparison figures](results/baselines/) document the exploratory path to the compact neural classifiers. Their experimental conditions are not assumed identical; the older ProtT5 RF grid-search export records a higher MCC than the final FNN, and its exact original split is unverified.
 
 ## Task 1 model development

@@ -1,5 +1,21 @@
 # Enzyme detection notebooks
 
+## From one-hot encoding to the final neural network
+
+We first compared protein representations using random forest, logistic regression and linear SVM. ProtT5 gave the highest MCC for each of the three classifiers in the comparison shown in our final talk.
+
+![MCC by sequence encoding for three classifiers, from the final talk](../../results/feature_comparison/impact_of_encoding_mcc.png)
+
+Experiment notebooks: [one-hot encoding](gs_comp_ohe.ipynb), [amino acid composition](gs_comp_aac.ipynb), [AAindex](gs_comp_aaindex.ipynb), [PseAAC](gs_comp_pseaac.ipynb), [PseAAC + AAindex](gs_comp_hybr_pseaac_aaindex.ipynb) and [ProtT5](gs_comp_prott5.ipynb). The [AAindex + n-grams experiment](gs_comp_hybr_aaindex_ngrams.ipynb) is another comparison outside this figure.
+
+With ProtT5 embeddings reduced to 128 dimensions, we compared the classical models with a feed-forward neural network. On the 5,901-protein test set the network reached an MCC of 0.82, ahead of linear SVM (0.74), logistic regression (0.74) and random forest (0.70).
+
+![Held-out MCC for the dummy baseline, classical models and neural network](../../results/baselines/task1/test_mcc_bootstrap.png)
+
+The [ProtT5 comparison notebook](gs_comp_prott5.ipynb) contains the baseline fits and the plotting cells. For the final network see [model selection](../model_selection.py), [the run 131 configuration](../../results/task1/model_selection/run_131/) and [training and evaluation](../main.py). The [early ProtT5 neural network experiment](nn_comp_prott5.ipynb) used a different dataset. The older [grid-search exports](../../results/feature_comparison/gridsearch_model_comparison/) also have a separate experimental history.
+
+## Experiment records
+
 | Comparison | Saved results |
 |---|---|
 | Classical features × classifier | [All 19 grid-search tables](../../results/feature_comparison/gridsearch_model_comparison/) and [score summary](../../results/feature_comparison/gridsearch_model_comparison/summary.csv) |
