@@ -5,6 +5,7 @@
 | Classical features × classifier | [All 19 grid-search tables](../../results/feature_comparison/gridsearch_model_comparison/) and [score summary](../../results/feature_comparison/gridsearch_model_comparison/summary.csv) |
 | ProtT5 baselines and neural network | [Five-fold CV](../../results/baselines/task1/cv_mcc.png) and [held-out test](../../results/baselines/task1/test_mcc_bootstrap.png) |
 | Early neural networks | [AAindex runs 0–15](../../results/task1/model_selection/early_experiments/v2_aaindex/) |
+| Early ProtT5 neural network | [Training and test notebook](nn_comp_prott5.ipynb) · [Run 19 configuration](../../results/task1/model_selection/crossval_runs/run_19/run_19_config.yaml) |
 | ProtT5/PCA neural network | [Selected run 131](../../results/task1/model_selection/run_131/), [CV archive](../../results/task1/model_selection/crossval_runs/) and [final training and test figures](../../results/task1/) |
 
 The notebooks come from the original project. Local paths are relative to each notebook, and saved outputs were cleared. Re-running the experiments requires the original datasets and embeddings. Some exploratory cells write files or use older APIs. See [data preparation](../../docs/data_preparation.md) for the splits and feature definitions.
@@ -25,3 +26,4 @@ The notebooks come from the original project. Local paths are relative to each n
 | [Neural networks with AAindex features](nn_comp_aaindex.ipynb) | `c8248016dbd3a285ea80f9acbff636a66e443b0d` |
 | [Preparing the enzyme detection dataset](preprocessing.ipynb) | `4c816aa5ae4493ace4141a631e3cfa904d092a14` |
 | [Protein embeddings with ProtT5](prott5_embedding_generator.ipynb) | `5ddad5c564c1120a7c7e55d94bb9c152674e4617` |
+| [Early ProtT5 neural network](nn_comp_prott5.ipynb), from `test.ipynb` | `249427dbf1f4d6765d44f71c101f6f0add8fa128` |
