@@ -30,7 +30,11 @@ flowchart TD
 - **Task 1:** binary classification using a compact 128–128–64–1 feed-forward network.
 - **Task 2:** classification into seven EC main classes using a 128–256–7 network.
 - **Task 3:** hierarchical integration of the two classifiers.
-- **Model selection:** stratified cross-validation, hyperparameter optimization with Optuna, experiment tracking with Weights & Biases, and comparison against classical baselines.
+- **Model selection:** stratified cross-validation and iterative local experiments for Task 1; Optuna hyperparameter optimization and Weights & Biases tracking for Task 2; comparison against classical baselines.
+
+## Research notebooks and data preparation
+
+The historical preprocessing and feature-comparison notebooks are retained under the respective task directories. See [data preparation and feature engineering](docs/data_preparation.md) for the documented final datasets and [original clustering-threshold results](results/data_analysis/task1_clustering/) for exploratory comparisons. Notebook outputs were cleared and local paths made relative; the notebooks are archival and have not been rerun. Original datasets and embeddings are not distributed.
 
 ## Results
 
@@ -51,7 +55,10 @@ task_1/src/       Binary classifier and research utilities
 task_2/src/       Multiclass classifier and research utilities
 task_3/src/       Portable hierarchical model adapter
 configs/         Selected original model configurations
-results/         Selected original test metric outputs
+task_1/notebooks/ Historical preprocessing and feature/classifier comparisons
+task_2/notebooks/ Historical preprocessing
+results/         Selected original experimental and test results
+docs/            Research methodology and archival notes
 scripts/         Synthetic model-interface smoke test
 ```
 
@@ -75,7 +82,7 @@ The selected research modules are available for code review. Their broader depen
 - Task 3 was adapted to accept trained classifiers and fitted PCA transformers explicitly instead of loading files from machine-specific paths.
 - The original Task 1 and Task 2 network implementations and saved configurations are retained. The saved Task 2 configuration records AdamW with learning rate 0.001, and the implementation includes a final sigmoid. The report describes a learning rate of 0.01 and a linear output layer. These historical discrepancies are recorded rather than silently changing the experiment.
 - Predictions are limited to the first EC level and a single label per protein. This is a research prototype, not a production annotation system.
-- Large datasets, raw embeddings, model checkpoints, intermediate logs and experimental notebooks are excluded from this curated version.
+- Large datasets, raw embeddings, model checkpoints and most intermediate logs are excluded. Selected archival research notebooks are included; they have not been rerun.
 
 ## Authors and contributions
 
