@@ -13,7 +13,17 @@ The EC classifier assigns an enzyme to one of seven main classes using 128 PCA-r
 
 The original inference export (`8351126b089050e908d8b788a645133b1c22e1c0`) records the protein ID, true EC class and predicted EC class for each of the 1,178 enzymes. Recounting those predictions reproduces all 49 cells of the saved confusion matrix and a macro-F1 of 0.74162. The report’s [bootstrap comparison with four baselines](../baselines/#task-2-ec-classification) rounds the network result to 0.74. The report’s class-wise recall values also differ in places from the saved matrix. For example, EC 1 has 261 correct predictions out of 300 (87%) in the saved run.
 
-The local 128-dimensional test file has the same name, size in examples and class counts as the archived evaluation, but only 364 protein IDs in common. Applying the portfolio checkpoint to that file yields macro-F1 0.21407. Its relation to the checkpoint’s training set and fitted PCA is unknown, so this run cannot establish performance on the historical test split. Repeating the original inference requires the matching projected embeddings or the original embeddings and fitted PCA.
+The matching historical dataset and original fitted PCA
+were recovered from the original shared project data.
+All 1,178 test protein IDs match the archived inference export.
+
+Inference using the recovered raw embeddings and original PCA
+reproduces all archived predictions, with macro-F1 of
+0.7416219455171614 and MCC of 0.723851024160418.
+
+The original PCA was exported to portable NPZ format.
+The reconstructed test embeddings match the stored projected
+embeddings with an RMSE of 2.0757e-09.
 
 ### Reading the search exports
 

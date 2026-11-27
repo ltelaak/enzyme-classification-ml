@@ -36,4 +36,4 @@ The local raw tables and split files confirm the sequence counts in the report. 
 | [Embedding generator](../task_1/notebooks/prott5_embedding_generator.ipynb) | Historical protein embedding generation |
 | [Task 2 preprocessing](../task_2/notebooks/preprocessing.ipynb) | EC classes, class-wise clustering, cap 2,000, splitting and PCA |
 
-Run archived notebooks from their own directories after supplying task-specific data and installing research dependencies. Some exploratory cells refer to earlier APIs, alternative execution environments or missing datasets. They have not been rerun. The portfolio excludes the raw protein data and the fitted PCA objects. [Clustering threshold results](../results/data_analysis/task1_clustering/)
+Run archived notebooks from their own directories after supplying task-specific data and installing research dependencies. Some exploratory cells refer to earlier APIs, alternative execution environments or missing datasets. They have not been rerun. The portfolio includes both recovered PCA transformations. The original protein datasets are preserved privately. [Clustering threshold results](../results/data_analysis/task1_clustering/)

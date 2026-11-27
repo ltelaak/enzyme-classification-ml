@@ -21,4 +21,12 @@ The AUC in the original inference code is calculated from rounded class predicti
 
 ![Original held-out confusion matrix](test/confusion_matrix.png)
 
-The original checkpoint requires 128-dimensional input. Raw 1024-dimensional ProtT5 embeddings require the original fitted PCA, not a newly fitted arbitrary transformer. Fitted PCA files and the original datasets are not included. Do not equate the current synthetic smoke test with reproduction of the historical metrics.
+The reconstructed Task 1 PCA is included in
+[checkpoints/pca](../../checkpoints/pca/).
+It was recovered from matching raw and projected training embeddings.
+
+On all 5,901 historical test proteins, the reconstructed transformation
+achieves an RMSE of 2.5323e-09 against the stored projected embeddings
+and produces identical classifier predictions.
+
+The original datasets are preserved privately.

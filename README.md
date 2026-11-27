@@ -9,8 +9,8 @@ Given a protein sequence, can we detect whether it is an enzyme and predict its 
 | Experiment | Code and model selection | Historical evaluation |
 |---|---|---|
 | Task 1 · Enzyme detection | [Feature comparisons from one-hot encoding to ProtT5 + NN](task_1/notebooks/README.md) · [NN selection and run 131](results/task1/model_selection/) | **0.8203 MCC** on 5,901 proteins. The closest classical models in the final comparison reached about 0.74. [Test output](results/task1_test_metrics.txt) |
-| Task 2 · EC main class | [Optuna and W&B notebook](task_2/notebooks/nn_model_selection.ipynb) · [Trial exports and validation folds](results/task2/) | **0.7416 macro-F1** from the archived predictions for 1,178 enzymes. [Test output](results/task2_test_metrics.txt) · [Baseline comparison](results/baselines/#task-2-ec-classification) |
-| Task 3 · Combined prediction | [Hierarchical model](task_3/src/models.py) | **0.6953 macro-F1** across eight classes. [Internal evaluation](results/task3/) |
+| Task 2 · EC main class | [Optuna and W&B notebook](task_2/notebooks/nn_model_selection.ipynb) · [Trial exports and validation folds](results/task2/) | **0.7416 macro-F1** reproduced on the original test set of 1,178 enzymes. [Test output](results/task2_test_metrics.txt) · [Baseline comparison](results/baselines/#task-2-ec-classification) |
+| Task 3 · Combined prediction | [Hierarchical model](task_3/src/models.py) | **0.6953 macro-F1** reproduced across eight classes on the historical notebook test set (5,111 proteins). [Internal evaluation](results/task3/) |
 | Price-149 · External evaluation of Task 2 | Training data filtered for similarity to Price-149 | **0.72 macro-F1 and 0.72 weighted F1** on 149 enzymes, as reported in the project report. [Benchmark figure and scores](results/price149/) |
 
 ### Data and model choices
@@ -21,9 +21,10 @@ For Task 1, ProtT5 performed best across three classical classifiers in the pres
 
 For Task 2, the selected **128–256–7 network** matches the parameters of Optuna trial 218 in the Luis database. Optuna records that trial as failed. The five stored W&B folds give a mean macro-F1 of 0.7502. Cross-validation used a learning rate of 0.0104079 and the final AdamW configuration records 0.001. The implementation retains the final sigmoid, which differs from the linear output described in the report. [Task 2 experiment record](results/task2/README.md)
 
-## Run the models
+## Installation and inference
 
-From the repository root, set up Python 3.11 or 3.12:
+From the repository root, set up a Python environment
+(tested with Python 3.12):
 
 ```bash
 python -m venv .venv
@@ -32,11 +33,58 @@ python -m pip install -r requirements.txt
 python -m scripts.smoke_test
 ```
 
-The smoke test checks the three model interfaces using synthetic embeddings, newly fitted PCA transforms and randomly initialized networks. To run the **two original trained classifiers**, use the [checkpoint example](checkpoints/README.md) in the same environment.
+The smoke test checks the three model interfaces using the recovered
+PCA transformations, synthetic inputs and randomly initialized networks.
 
-With the original test embeddings supplied locally, the Task 1 checkpoint reproduces the reported MCC and confusion matrix. For Task 2, the archived predictions confirm the score. The available embedding file contains a different set of proteins. [Task 2 verification](results/task2/#held-out-test-verification)
+The repository includes both original trained checkpoints, their
+configurations and the corresponding PCA transformations.
+See [checkpoint usage](checkpoints/README.md).
 
-This repository includes both checkpoints and their configurations. The test data and the two fitted PCA transforms are outside the portfolio. The [research dependencies](requirements-research.txt) cover the broader notebook workflow.
+For the original research notebooks, training and FASTA-based inference,
+install the extended dependencies:
+
+```bash
+python -m pip install -r requirements-research.txt
+```
+
+The model and research environments were tested through clean installations.
+
+## Reproducibility
+
+The original trained classifiers were evaluated using the recovered
+historical test embeddings.
+
+| Metric | Task 1 | Task 2 | Task 3 |
+|---|---:|---:|---:|
+| Test samples | 5,901 | 1,178 | 5,111 |
+| Macro-F1 | 0.9101 | 0.7416 | 0.6953 |
+| MCC | 0.8203 | 0.7239 | 0.7469 |
+| Balanced accuracy | 0.9114 | 0.7440 | 0.7325 |
+
+The Task 1 PCA was reconstructed from matching raw and projected
+training embeddings. The original Task 2 PCA was recovered and
+exported to NPZ format.
+
+Both transformations reproduce the stored test embeddings with
+an RMSE below 3e-9 and identical classifier predictions.
+
+The [validation script](scripts/validate_checkpoints.py)
+checks all three classification tasks using the historical test data:
+
+```bash
+python -m scripts.validate_checkpoints --help
+```
+
+The original datasets are preserved privately and are not distributed
+with this repository.
+
+Task 3 reproduces the historical notebook evaluation rather than
+the separately described filtered report dataset.
+Price-149 remains a historical external benchmark reported in
+the original project and is outside the verified reproduction scope.
+
+Full retraining and fresh ProtT5 embedding generation have not
+been rerun as part of the portfolio preparation.
 
 ## Authors and contributions
 
