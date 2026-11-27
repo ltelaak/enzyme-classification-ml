@@ -1,0 +1,12 @@
+Dataset: embeddings_uniprot_exp_enzymes_c30_flens2-98_usamp_exp_test85_dim128
+
+Inference metrics:
+Balanced Accuracy: 0.6068245768547058 | Macro F1: 0.606153666973114 | MCC: 0.5471991300582886
+Confusion Matrix:
+tensor([[18,  0,  2,  9,  0,  3,  1],
+        [ 2, 19,  5,  6,  0,  1,  1],
+        [ 2,  6, 18,  5,  1,  1,  0],
+        [ 7,  2,  2, 21,  0,  2,  0],
+        [ 2,  3,  0, 11, 11,  5,  1],
+        [ 1,  0,  1,  1,  4, 26,  1],
+        [ 2,  0,  0,  1,  1,  0, 30]])

@@ -1,0 +1,4 @@
+Dataset: embeddings_uniprot_exp_proteins_c30_flens2-98_enz_test
+
+Inference metrics:
+accuracy: 0.7405524487375021 | mcc: 0.41195022619160565 | auc: 0.7043241055980355
