@@ -1,22 +1,26 @@
+-r requirements.txt
+
+# Sequence processing and embeddings
 biopython==1.85
 esm==3.2.1
-httpx  # imported by the ESM SDK
-h5py==3.14.0
-matplotlib==3.10.3
-numpy==2.2.4
+httpx==0.29.0
 pandas==2.3.0
 protlearn==0.0.3
 pyfaidx==0.9.0.3
 pymmseqs==1.0.5
-PyYAML==6.0.2
-scikit-learn==1.7.0
 sentencepiece==0.2.1
-torch==2.7.1
 tqdm==4.67.1
 transformers==4.48.1
-# Additional imports used by the selected research modules
-seaborn
-torchmetrics
-# Experiment tracking / tuning in the original research workflow
-optuna
-wandb
+
+# Legacy protlearn compatibility
+setuptools==80.9.0
+jaraco.text==4.3.0
+
+# Evaluation and visualization
+matplotlib==3.10.3
+seaborn==0.13.2
+torchmetrics==1.9.0
+
+# Experiment tracking and optimization
+optuna==5.1.0
+wandb==0.31.2
