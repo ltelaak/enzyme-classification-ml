@@ -75,7 +75,7 @@ def train_model(model, model_name, dataset, optimizer, criterion, epochs=100, ea
                     print('Early stopping')
                     break
     model_dir_path = (Path(__file__).parent / Path(f'../results/models/{model_name}')).resolve()
-    model_dir_path.mkdir(exist_ok=True)
+    model_dir_path.mkdir(exist_ok=True, parents=True)
     save_config(path=model_dir_path, model=model, dataset=dataset, optimizer=optimizer, loss_fn=criterion, epochs=epochs)
     torch.save(model.state_dict(), model_dir_path / f'{model_name}.pth')
     if show_training_curves:
